@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <h1>
+        <center>
+            Transcripts Generator
+        </center>
+    </h1>
+    <center>
+        <h2>File Upload</h2>
+    </center>
+    
+
+    <form action="/" method="post" enctype="multipart/form-data">
+        <center>
+            <div>
+                <label for="grades">Upload Grades File: </label>
+                <input type="file" name="grades" value="grades">
+            </div>
+            <br>
+            <div>
+                <label for="namesroll">Upload Names Roll File: </label>
+                <input type="file" name="namesroll" value="namesroll">
+            </div>
+            <br>
+            <div>
+                <label for="subjectmaster">Upload Subject Master File: </label>
+                <input type="file" name="subjectmaster" value="subjectmaster">
+            </div>
+            <br>
+            <input type="submit" name="submit_files" value="Submit">
+            <center>
+                {% if success %}
+                <p style="color:#0000ff">Your files have been sucessfully uploaded to the uploads folder in the current directory!</p>
+                {% endif %}
+                
+                {% if error %}
+                <p style="color:crimson">{{error}}</p>
+                {% endif %}
+            </center>
+        </center>
+
+    </form>
+    <center>
+        <h5>Optional Uploads</h5>
+    </center>
+    
+    <form action="/" method="post" enctype="multipart/form-data">
+        <center>
+            
+            <div>
+                <label for="signature">Upload signature: </label>
+                <input type="file" name="signature" value="signature">
+                <input type="submit" name="submit_signature" value="Submit">
+            </div>
+            
+            <center>
+                {% if success_signature %}
+                <p style="color:#0000ff">Upload success!</p>
+                {% endif %}
+                
+                {% if error_signature %}
+                <p style="color:crimson">{{error_signature}}</p>
+                {% endif %}
+            </center>
+        </center>
+    </form>
+    <form action="/" method="post" enctype="multipart/form-data">
+        <center>
+            
+            <div>
+                <label for="signature">Upload stamp: </label>
+                <input type="file" name="stamp" value="stamp">
+                <input type="submit" name="submit_stamp" value="Submit">
+            </div>
+            
+            <center>
+                {% if success_stamp %}
+                <p style="color:#0000ff">Upload success!</p>
+                {% endif %}
+                
+                {% if error_stamp %}
+                <p style="color:crimson">{{error_stamp}}</p>
+                {% endif %}
+            </center>
+        </center>
+    </form>
+
+    <center> 
+        <h2>Generator</h2>
+    </center>
+    <center>
+        <h4>Generate a range</h4>
+    </center>
+    <form action="/" method="post" enctype="multipart/form-data">
+        <center>
+            <div>
+                <label for="range1">Please input range: </label>
+                <input type="text" name="range1" placeholder="From">
+                <label for="range2"> - </label>
+                <input type="text" name="range2" placeholder="To">
+            </div>
+            <div>
+                <input type="submit" name="generate_range" value="Click to generate rangewise transcripts!">
+            </div>
+            <center>
+                {% if success_range %}
+                <p style="color:#0000ff">{{success_range}}</p>
+                <a href="{{url_for("download_transcripts")}}">Download Transcripts zip file</a>
+                {% endif %}
+                <br>
+                {% if not_present %}
+                <a href="{{url_for("not_present_function")}}">Check students whose file were not generated</a>
+                {% endif %}
+
+                {% if error_range %}
+                <p style="color:crimson">{{error_range}}</p>
+                {% endif %}
+            </center>
+        </center>
+    </form>
+    <center>
+        <h4>Generate all</h4>
+    </center>
+    <form action="/" method="post" enctype="multipart/form-data">
+        <center>
+            <div>
+                <input type="submit" name="generate_full" value="Click to generate all transcripts!">
+            </div>
+            <center>
+                {% if success_full %}
+                <p style="color:#0000ff">{{success_full}}</p>
+                <a href="{{url_for("download_transcripts")}}">Download Transcripts zip file</a>
+                {% endif %}
+                {% if error_full %}
+                <p style="color:crimson">{{error_full}}</p>
+                {% endif %}
+            </center>
+        </center>
+        <div>
+            <center>
+                <h5>Click the below button to refresh the server!</h5>
+                <input type="submit" name='refresh' value='Refresh'></input>
+                <center>
+                    {% if error_refresh %}
+                    <p style="color:crimson">{{error_refresh}}</p>
+                    {% endif %}
+                </center>
+                {% if success_refresh %}
+                <p style="color:#0000ff">Server refreshed! All uploaded files and generated files removed!</p>
+                {% endif %}
+            </center>
+            
+        </div>
+    </form>
+    
+    
+</body>
+</html>
